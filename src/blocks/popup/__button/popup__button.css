@@ -19,6 +19,22 @@
   cursor: pointer;
 }
 
+.popup__button_disabled {
+    opacity: 0.2;
+    background: transparent;
+    color: #000;
+    border: 1px solid black;
+    pointer-events: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.popup__delete_card {
+      margin-top: 33px;
+}
+
 @media screen and (max-width: 568px) {
   .popup__button {
     font-size: 14px;

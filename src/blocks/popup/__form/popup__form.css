@@ -1,3 +1,10 @@
 .popup__form {
   margin-top: 27px;
 }
+
+.popup__form_field {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin: 0 0 10px 0;
+}
