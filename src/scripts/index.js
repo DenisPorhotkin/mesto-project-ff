@@ -139,7 +139,6 @@ function openEditProfilePopup() {
     jobInput.value = profileJob.textContent;
     openModal(popupEditProfile);
     clearValidation(formEditProfile, parametersValid);
-    enableValidation(parametersValid);
 }
 
 // Функция открытия попапа для редактирования аватара профиля
@@ -149,7 +148,7 @@ function openEditAvatarProfilePopup() {
     avatarInput.value = avatarUrl;
     openModal(popupEditAvatarProfile);
     clearValidation(formEditAvatarProfile, parametersValid);
-    enableValidation(parametersValid);
+
 }
 
 // Обработчик для попапа добавления новой карточки
@@ -214,11 +213,20 @@ function changeAddDeleteLikes(dataCard, card) {
             .then((data) => {
                 handleLikeCard(likeButton, data);
             })
+            .catch((err) => {
+                showError("Не удалось выполнить действие. Попробуйте ещё раз.");
+                console.error('Ошибка удаления лайка:', err);                
+            })
+            
     } else {
         likeCardOnServer(dataCard._id)
             .then((data) => {
                 handleLikeCard(likeButton, data);
             })
+            .catch((err) => {
+                showError("Не удалось выполнить действие. Попробуйте ещё раз.");
+                console.error('Ошибка добавления лайка:', err);                
+            })            
     }
 }
 
@@ -251,10 +259,11 @@ profileAddButton.addEventListener('click', () => {
     inputNameFormNewCard.value = '';
     inputLinkFormNewCard.value = '';
     openModal(popupAddNewCard); 
-    enableValidation(parametersValid); 
     clearValidation(formAddNewCard, parametersValid);
 });
 formAddNewCard.addEventListener('submit', handleAddNewCardSubmit);
 formDeleteCard.addEventListener('submit', handleDeleteCardSubmit);
 avatarElement.addEventListener('click', openEditAvatarProfilePopup);
 formEditAvatarProfile.addEventListener('submit', handleEditAvatarProfileSubmit);
+
+enableValidation(parametersValid); 

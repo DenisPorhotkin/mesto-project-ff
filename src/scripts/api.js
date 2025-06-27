@@ -13,18 +13,22 @@ function handleResponse(res) {
   return Promise.reject(`Ошибка: ${res.status}`);
 }
 
+function request(endPoint, options) {
+  return fetch(`${config.baseUrl}${endPoint}`, options).then(handleResponse)
+}
+
 export const getInitialCards = () => {
-  return fetch(`${config.baseUrl}/cards`, {
+  const options = {
     headers: config.headers
-  })
-    .then(handleResponse);
+  }
+  return request('/cards', options);
 }
 
 export const getUserParameters = () => {
-    return fetch(`${config.baseUrl}/users/me`, {
-        headers: config.headers
-    })
-    .then(handleResponse);
+  const options = {
+    headers: config.headers
+  }
+  return request('/users/me', options);
 }
 
 export const checkResource = async (url) => {
@@ -48,60 +52,60 @@ export const checkResource = async (url) => {
 }
 
 export const editProfile = (nameProfile, aboutProfile) => {
-    return fetch(`${config.baseUrl}/users/me`, {
-        method: 'PATCH',
-        headers: config.headers,
-        body: JSON.stringify({
-            name: nameProfile,
-            about: aboutProfile
-        })
-    })
-    .then(handleResponse);
+  const options = {
+    method: 'PATCH',
+    headers: config.headers,
+    body: JSON.stringify({
+        name: nameProfile,
+        about: aboutProfile
+    })    
+  }
+  return request('/users/me', options);
 }
 
 export const editAvatar = (linkAvatar) => {
-    return fetch(`${config.baseUrl}/users/me/avatar`, {
-        method: 'PATCH',
-        headers: config.headers,
-        body: JSON.stringify({
-            avatar: linkAvatar,
-        })
-    })
-    .then(handleResponse);
+  const options = {
+    method: 'PATCH',
+    headers: config.headers,
+    body: JSON.stringify({
+        avatar: linkAvatar,
+    })    
+  }
+  return request('/users/me/avatar', options);
 }
 
 export const addNewCardOnServ = (nameCard, linkCard) => {
-    return fetch(`${config.baseUrl}/cards`, {
-        method: 'POST',
-        headers: config.headers,
-        body: JSON.stringify({
-            name: nameCard,
-            link: linkCard
-        })
+  const options = {
+    method: 'POST',
+    headers: config.headers,
+    body: JSON.stringify({
+        name: nameCard,
+        link: linkCard
     })
-    .then(handleResponse);
+  }
+  return request('/cards', options);
 }
 
 export const deleteCardOnServer = (idCard) => {
-    return fetch(`${config.baseUrl}/cards/${idCard}`, {
-        method: 'DELETE',
-        headers: config.headers
-    })
-    .then(handleResponse);
+  const options = {
+    method: 'DELETE',
+    headers: config.headers    
+  }
+  return request(`/cards/${idCard}`, options);
 }
 
 export const likeCardOnServer = (idCard) => {
-    return fetch(`${config.baseUrl}/cards/likes/${idCard}`, {
-        method: 'PUT',
-        headers: config.headers
-    })
-    .then(handleResponse);
+  const options = {
+    method: 'PUT',
+    headers: config.headers    
+  }
+  return request(`/cards/likes/${idCard}`, options);
 }
 
 export const deleteLikeCardOnServer = (idCard) => {
-    return fetch(`${config.baseUrl}/cards/likes/${idCard}`, {
-        method: 'DELETE',
-        headers: config.headers
-    })
-    .then(handleResponse);
+  const options = {
+    method: 'DELETE',
+    headers: config.headers    
+  }
+  return request(`/cards/likes/${idCard}`, options);
 }

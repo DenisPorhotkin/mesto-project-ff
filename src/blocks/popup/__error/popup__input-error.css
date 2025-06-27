@@ -6,6 +6,7 @@
     top: calc(100% + 6px);
     left: 0;
     transition: 0.3s;
+    line-height: 1;
 }
 
 .popup__error_visible {
