@@ -1,2 +1,2 @@
 # Проектная работа Mesto
-git@github.com:DenisPorhotkin/mesto-project-ff.git
+https://DenisPorhotkin.github.io/mesto-project-ff
